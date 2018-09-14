@@ -63,8 +63,11 @@ class Collector:
     def get_flat(self):
         return self.files
 
-    def print_ascii_tree(self):
-        raise NotImplementedError
+    def print_tree(self):
+        import yaml
+        print(yaml.dump(self.get_tree(), default_flow_style=False))
+
+    
         
 class DoubleEntryError(Exception):
     def __init__(self, expression, message):
