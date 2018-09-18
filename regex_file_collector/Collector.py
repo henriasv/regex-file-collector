@@ -29,6 +29,26 @@ class Collector:
                 #for file in files:
                 #    print(os.path.join(name, file))
 
+    def add_files(self, path):
+        for root, _, files in os.walk(path):
+            for name in files:
+                fullfile = os.path.join(root, name)
+                matches = re.findall(self.pattern, fullfile)
+                if len(matches) == 1:
+                    param_tuple = matches[0]
+                    print(fullfile)
+                    if not param_tuple in self.files.keys():
+                        self.files[param_tuple] = fullfile
+                    else:
+                        raise DoubleEntryError
+                    
+                elif len(matches) > 1:
+                    print("Found more than one match group")
+                else: 
+                    pass
+
+
+
     def get_tree(self, custom_ordering=None):
         """ Get a nested dictionary of the files. 
         The tree structure will group elements based on the identifier tuples, from left to right
