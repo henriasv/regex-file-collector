@@ -14,20 +14,16 @@ class Collector:
                 matches = re.findall(self.pattern, fullfile)
                 if len(matches) == 1:
                     param_tuple = matches[0]
-                    print(fullfile)
                     if not param_tuple in self.files.keys():
                         self.files[param_tuple] = fullfile
                     else:
+                        print(param_tuple)
                         raise DoubleEntryError
                     
                 elif len(matches) > 1:
                     print("Found more than one match group")
                 else: 
                     pass
-                    
-                
-                #for file in files:
-                #    print(os.path.join(name, file))
 
     def add_files(self, path):
         for root, _, files in os.walk(path):
@@ -40,6 +36,7 @@ class Collector:
                     if not param_tuple in self.files.keys():
                         self.files[param_tuple] = fullfile
                     else:
+                        print(param_tuple)
                         raise DoubleEntryError
                     
                 elif len(matches) > 1:
